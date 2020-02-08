@@ -1,2 +1,10 @@
 ---
 # tasks file for zabbix
+
+- name: Validating OS running this role
+  debug: msg="Linux {{ ansible_os_family }} is not supported" fail=yes
+  when: not ansible_os_family == 'RedHat'
+
+- name: Centos and Redhat installation
+  include: centos-redhat.yml
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Centos"
