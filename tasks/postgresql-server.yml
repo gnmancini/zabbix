@@ -1,0 +1,48 @@
+---
+# tasks file for zabbix
+- name: Configure selinux permissive
+  selinux:
+    policy: targeted
+    state: permissive
+
+<<<<<<< HEAD:tasks/centos-redhat.yml
+
+  name: Install packages
+  dnf: 
+    name: {{ item }}
+=======
+- name: Install postgresql
+  dnf: 
+    name: postgresql-server
+>>>>>>> c995b4dc232f19fe79c11b22973779a90a265d03:tasks/postgresql-server.yml
+    state: present
+  with_item:
+    - mariadb
+    - httpd
+    - php:7.2
+    - php
+    - php-pear
+    - php-cgi
+    - php-common
+    - php-mbstring
+    - php-snmp
+    - php-gd
+    - php-xml
+    - php-mysqlnd
+    - php-gettext
+    - php-bcmath
+    - php-json
+    - php-ldap
+  
+  name: Enabling services
+  systemd:
+    name: {{ item }}
+    enabled: yes
+    masked: no
+  with_item:
+    - mariadb
+    - httpd
+    - php-fpm
+
+
+
