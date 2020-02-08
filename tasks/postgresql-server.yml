@@ -5,10 +5,16 @@
     policy: targeted
     state: permissive
 
+<<<<<<< HEAD:tasks/centos-redhat.yml
 
   name: Install packages
   dnf: 
     name: {{ item }}
+=======
+- name: Install postgresql
+  dnf: 
+    name: postgresql-server
+>>>>>>> c995b4dc232f19fe79c11b22973779a90a265d03:tasks/postgresql-server.yml
     state: present
   with_item:
     - mariadb

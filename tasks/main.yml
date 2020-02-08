@@ -6,5 +6,9 @@
   when: not ansible_os_family == 'RedHat'
 
 - name: Centos and Redhat installation
-  include: centos-redhat.yml
+  include: postgresql-server.yml
+  when: ansible_os_family == "RedHat" or ansible_os_family == "Centos"
+
+- name: Centos and Redhat installation
+  include: nagios-server.yml
   when: ansible_os_family == "RedHat" or ansible_os_family == "Centos"
