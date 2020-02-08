@@ -2,7 +2,7 @@
 # tasks file for zabbix
 
 - name: Install postgresql
-  yum: 
+  dnf: 
     name: postgresql-server
     state: present
   
