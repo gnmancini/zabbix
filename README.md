@@ -1,9 +1,9 @@
-# ZABBIX SERVER ROLE
+# ZABBIX Server Role
 With this ansible role you can install zabbix-server on a CentOS 8.1.
 When the role finishes you can access the server using http://zabbix-ip-address/zabbix and finish the configuration
 This role will install zabbix on Centos 8.1.
 
-# REQUIREMENTS
+# Requirements
 CentOS 8.1 server installed.
 Ansible 2.9.3
 
