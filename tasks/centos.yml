@@ -59,9 +59,29 @@
 
 - name: Getting database schemma
   shell: "gunzip /usr/share/doc/zabbix-server-mysql/create.sql.gz"
+  ignore_errors: yes
 
 - name: Importing database schemma
   mysql_db:
     state: import
     name: zabbix
     target: /usr/share/doc/zabbix-server-mysql/create.sql
+  ignore_errors: yes
+
+- name: Copy zabbix configuration file
+  copy:
+    src: etc/zabbix/zabbix_server.conf
+    dest: /etc/zabbix/zabbix_server.conf
+    owner: root
+    group: root
+    mode: '0640'
+
+- name: Enabling zabbix server
+  systemd:
+    name: zabbix-server
+    enabled: yes
+    masked: no
+    state: started
+  with_items:
+    - zabbix-server
+    - zabbix-agent
