@@ -1,39 +1,30 @@
 ---
-# tasks file for zabbix
+
 - name: Configure selinux permissive
   selinux:
     policy: targeted
     state: permissive
 
-  name: Install packages
-  dnf: 
-    name: {{ item }}
-
-    state: present
-  with_item:
-    - mariadb
-    - httpd
-    - php:7.2
-    - php
-    - php-pear
-    - php-cgi
-    - php-common
-    - php-mbstring
-    - php-snmp
-    - php-gd
-    - php-xml
-    - php-mysqlnd
-    - php-gettext
-    - php-bcmath
-    - php-json
-    - php-ldap
-  
-  name: Enabling services
+- name: Disable firewalld
   systemd:
-    name: {{ item }}
+    name: firewalld
+    state: stopped
+    masked: yes
+
+- name: Install module
+  command: "dnf module -y install php:7.2"
+
+- name: Install packages
+  dnf: 
+    name: ['mariadb-server','httpd','php','php-pear','php-cgi','php-common','php-mbstring','php-snmp','php-gd','php-xml','php-mysqlnd','php-gettext','php-bcmath','php-json','php-ldap']
+    state: present
+  
+- name: Enabling services
+  systemd:
+    name: "{{ item }}"
     enabled: yes
     masked: no
-  with_item:
+  with_items:
     - mariadb
     - httpd
     - php-fpm
