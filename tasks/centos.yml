@@ -30,6 +30,15 @@
     - httpd
     - php-fpm
 
+- name: TO BE FIXED PROPERLY
+  copy:
+    src: etc/php.ini
+    dest: /etc/php.ini
+    owner: root
+    group: root
+    mode: '0644'
+
+
 - name: Create a new database with name 'zabbix'
   mysql_db:
     name: zabbix
