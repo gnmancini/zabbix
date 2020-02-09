@@ -57,5 +57,11 @@
     name: ['zabbix-server-mysql','zabbix-agent','zabbix-web-mysql']
     state: present
 
-- name: Install zabbix database schemma
-  shell: "zcat /usr/share/doc/zabbix-server-mysql*/create.sql.gz | mysql -u zabbix -p zabbix >/tmp/install_zabbix_database.log"
+- name: Getting database schemma
+  shell: "gunzip /usr/share/doc/zabbix-server-mysql/create.sql.gz"
+
+- name: Importing database schemma
+  mysql_db:
+    state: import
+    name: zabbix
+    target: /usr/share/doc/zabbix-server-mysql/create.sql
