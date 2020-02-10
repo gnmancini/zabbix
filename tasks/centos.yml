@@ -16,7 +16,7 @@
 
 - name: Install packages
   dnf: 
-    name: ['mariadb-server','httpd','php','php-pear','php-cgi','php-common','php-mbstring','php-snmp','php-gd','php-xml','php-mysqlnd','php-gettext','php-bcmath','php-json','php-ldap','python3','python3-PyMySQL','epel-release','htop']
+    name: ['mariadb-server','httpd','php','php-pear','php-cgi','php-common','php-mbstring','php-snmp','php-gd','php-xml','php-mysqlnd','php-gettext','php-bcmath','php-json','php-ldap','python3','python3-PyMySQL','epel-release']
     state: present
   
 - name: Enabling services
