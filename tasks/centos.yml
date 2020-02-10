@@ -30,7 +30,7 @@
     - httpd
     - php-fpm
 
-- name: TO BE FIXED PROPERLY
+- name: Copy php configuration
   copy:
     src: etc/php.ini
     dest: /etc/php.ini
