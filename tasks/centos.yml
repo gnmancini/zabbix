@@ -94,3 +94,11 @@
   with_items:
     - zabbix-server
     - zabbix-agent
+
+- name: restarting php-fpm and httpd
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - php-fpm
+    - httpd
