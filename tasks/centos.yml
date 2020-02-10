@@ -16,7 +16,7 @@
 
 - name: Install packages
   dnf: 
-    name: ['mariadb-server','httpd','php','php-pear','php-cgi','php-common','php-mbstring','php-snmp','php-gd','php-xml','php-mysqlnd','php-gettext','php-bcmath','php-json','php-ldap','python3','python3-PyMySQL','epel-release','htop']
+    name: ['mariadb-server','httpd','php','php-pear','php-cgi','php-common','php-mbstring','php-snmp','php-gd','php-xml','php-mysqlnd','php-gettext','php-bcmath','php-json','php-ldap','python3','python3-PyMySQL','epel-release']
     state: present
   
 - name: Enabling services
@@ -30,7 +30,7 @@
     - httpd
     - php-fpm
 
-- name: TO BE FIXED PROPERLY
+- name: Copy php configuration
   copy:
     src: etc/php.ini
     dest: /etc/php.ini
@@ -51,7 +51,7 @@
     priv: 'zabbix.*:ALL,GRANT'
     state: present
 
-- name: Install zabbix related packages
+- name: Install zabbix repository
   dnf:
     name: https://repo.zabbix.com/zabbix/4.2/rhel/8/x86_64/zabbix-release-4.2-2.el8.noarch.rpm
     state: present
@@ -94,3 +94,11 @@
   with_items:
     - zabbix-server
     - zabbix-agent
+
+- name: restarting php-fpm and httpd
+  systemd:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - php-fpm
+    - httpd
