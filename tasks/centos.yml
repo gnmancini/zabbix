@@ -87,7 +87,7 @@
 
 - name: Enabling zabbix server
   systemd:
-    name: zabbix-server
+    name: "{{ item }}"
     enabled: yes
     masked: no
     state: started
